@@ -35,7 +35,7 @@ export default () => {
         socket.on('auth success', () => setConnectionState(true));
         socket.on('SOCKET_CLOSE', () => setConnectionState(false));
         socket.on('SOCKET_CONNECT_ERROR', () => {
-            setError('Failed to connect to websocket instance after multiple attempts: try refreshing the page.');
+            setError('WebSocketインスタンスへの接続に複数回失敗しました。ページを更新してください。');
         });
         socket.on('SOCKET_ERROR', () => {
             setError('connecting');
@@ -57,7 +57,7 @@ export default () => {
                 updateToken(uuid, socket);
             } else {
                 setError(
-                    'There was an error validating the credentials provided for the websocket. Please refresh the page.'
+                    'WebSocketの認証情報の検証中にエラーが発生しました。ページを更新してください。'
                 );
             }
         });

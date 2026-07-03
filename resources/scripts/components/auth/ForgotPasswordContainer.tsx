@@ -67,24 +67,24 @@ export default () => {
             initialValues={{ email: '' }}
             validationSchema={object().shape({
                 email: string()
-                    .email('A valid email address must be provided to continue.')
-                    .required('A valid email address must be provided to continue.'),
+                    .email('有効なメールアドレスを入力してください。')
+                    .required('有効なメールアドレスを入力してください。'),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
-                <LoginFormContainer title={'Request Password Reset'} css={tw`w-full flex`}>
+                <LoginFormContainer title={'パスワードリセットをリクエスト'} css={tw`w-full flex`}>
                     <Field
                         light
-                        label={'Email'}
+                        label={'メールアドレス'}
                         description={
-                            'Enter your account email address to receive instructions on resetting your password.'
+                            'アカウントのメールアドレスを入力してください。パスワードリセットの手順が送信されます。'
                         }
                         name={'email'}
                         type={'email'}
                     />
                     <div css={tw`mt-6`}>
                         <Button type={'submit'} size={'xlarge'} disabled={isSubmitting} isLoading={isSubmitting}>
-                            Send Email
+                            メールを送信
                         </Button>
                     </div>
                     {recaptchaEnabled && (
@@ -107,7 +107,7 @@ export default () => {
                             to={'/auth/login'}
                             css={tw`text-xs text-neutral-500 tracking-wide uppercase no-underline hover:text-neutral-700`}
                         >
-                            Return to Login
+                            ログインに戻る
                         </Link>
                     </div>
                 </LoginFormContainer>

@@ -74,13 +74,13 @@ const MassActionsBar = () => {
                     onConfirmed={onClickConfirmDeletion}
                 >
                     <p className={'mb-2'}>
-                        本当に&nbsp;
-                        <span className={'font-semibold text-gray-50'}>{selectedFiles.length} 個のファイル</span>を削除しますか？この操作は元に戻せず、ファイルは復元できません。
+                        <span className={'font-semibold text-gray-50'}>{selectedFiles.length} 個のファイル</span>
+                        を削除してもよろしいですか？これは元に戻せない操作で、ファイルは復元できません。
                     </p>
                     {selectedFiles.slice(0, 15).map((file) => (
                         <li key={file}>{file}</li>
                     ))}
-                    {selectedFiles.length > 15 && <li>他 {selectedFiles.length - 15} 個</li>}
+                    {selectedFiles.length > 15 && <li>ほか {selectedFiles.length - 15} 件</li>}
                 </Dialog.Confirm>
                 {showMove && (
                     <RenameFileModal

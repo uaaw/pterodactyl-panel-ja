@@ -21,7 +21,7 @@ export default () => {
                 addFlash({
                     key: 'settings',
                     type: 'success',
-                    message: 'サーバーの再インストールプロセスが開始されました。',
+                    message: 'サーバーの再インストール処理を開始しました。',
                 });
             })
             .catch((error) => {
@@ -40,17 +40,17 @@ export default () => {
         <TitledGreyBox title={'サーバーを再インストール'} css={tw`relative`}>
             <Dialog.Confirm
                 open={modalVisible}
-                title={'サーバーの再インストールを確認'}
+                title={'サーバー再インストールの確認'}
                 confirm={'はい、サーバーを再インストールします'}
                 onClose={() => setModalVisible(false)}
                 onConfirmed={reinstall}
             >
-                サーバーが停止され、このプロセス中に一部のファイルが削除または変更される場合があります。続行してもよろしいですか？
+                サーバーは停止され、この処理中に一部のファイルが削除または変更される可能性があります。続行してもよろしいですか？
             </Dialog.Confirm>
             <p css={tw`text-sm`}>
-                サーバーを再インストールすると、サーバーが停止し、初期設定を行ったインストールスクリプトが再実行されます。&nbsp;
+                サーバーを再インストールするとサーバーは停止され、初期セットアップ時に使用されたインストールスクリプトが再実行されます。&nbsp;
                 <strong css={tw`font-medium`}>
-                    このプロセス中に一部のファイルが削除または変更される場合があります。続行前にデータをバックアップしてください。
+                    この処理中に一部のファイルが削除または変更される可能性があります。続行する前にデータをバックアップしてください。
                 </strong>
             </p>
             <div css={tw`mt-6 text-right`}>

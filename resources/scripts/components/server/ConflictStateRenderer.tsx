@@ -14,19 +14,19 @@ export default () => {
 
     return status === 'installing' || status === 'install_failed' || status === 'reinstall_failed' ? (
         <ScreenBlock
-            title={'インストーラー実行中'}
+            title={'インストーラーを実行中'}
             image={ServerInstallSvg}
-            message={'サーバーはまもなく準備完了します。数分後にもう一度お試しください。'}
+            message={'サーバーはまもなく利用可能になります。数分後にもう一度お試しください。'}
         />
     ) : status === 'suspended' ? (
         <ScreenBlock
-            title={'サーバー停止中'}
+            title={'サーバーは停止されています'}
             image={ServerErrorSvg}
-            message={'このサーバーは停止されており、アクセスできません。'}
+            message={'このサーバーは停止されているためアクセスできません。'}
         />
     ) : isNodeUnderMaintenance ? (
         <ScreenBlock
-            title={'ノードメンテナンス中'}
+            title={'ノードはメンテナンス中です'}
             image={ServerErrorSvg}
             message={'このサーバーのノードは現在メンテナンス中です。'}
         />
@@ -36,8 +36,8 @@ export default () => {
             image={ServerRestoreSvg}
             message={
                 isTransferring
-                    ? 'サーバーを新しいノードに転送中です。後でもう一度確認してください。'
-                    : 'サーバーは現在バックアップから復元中です。数分後にもう一度確認してください。'
+                    ? 'サーバーを新しいノードへ転送しています。後でもう一度確認してください。'
+                    : 'サーバーをバックアップから復元しています。数分後にもう一度確認してください。'
             }
         />
     );

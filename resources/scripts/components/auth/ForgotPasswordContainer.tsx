@@ -38,7 +38,7 @@ export default () => {
                 console.error(error);
 
                 setSubmitting(false);
-                addFlash({ type: 'error', title: 'Error', message: httpErrorToHuman(error) });
+                addFlash({ type: 'error', title: 'エラー', message: httpErrorToHuman(error) });
             });
 
             return;
@@ -47,11 +47,11 @@ export default () => {
         requestPasswordResetEmail(email, token)
             .then((response) => {
                 resetForm();
-                addFlash({ type: 'success', title: 'Success', message: response });
+                addFlash({ type: 'success', title: '成功', message: response });
             })
             .catch((error) => {
                 console.error(error);
-                addFlash({ type: 'error', title: 'Error', message: httpErrorToHuman(error) });
+                addFlash({ type: 'error', title: 'エラー', message: httpErrorToHuman(error) });
             })
             .then(() => {
                 setToken('');
@@ -67,17 +67,17 @@ export default () => {
             initialValues={{ email: '' }}
             validationSchema={object().shape({
                 email: string()
-                    .email('有効なメールアドレスを入力してください。')
-                    .required('有効なメールアドレスを入力してください。'),
+                    .email('続行するには有効なメールアドレスを入力してください。')
+                    .required('続行するには有効なメールアドレスを入力してください。'),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
                 <LoginFormContainer title={'パスワードリセットをリクエスト'} css={tw`w-full flex`}>
                     <Field
                         light
-                        label={'メールアドレス'}
+                        label={'メール'}
                         description={
-                            'アカウントのメールアドレスを入力してください。パスワードリセットの手順が送信されます。'
+                            'パスワードのリセット手順を受け取るには、アカウントのメールアドレスを入力してください。'
                         }
                         name={'email'}
                         type={'email'}

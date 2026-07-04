@@ -32,17 +32,17 @@ const ModalContent = ({ ...props }: RequiredModalProps) => {
                 <Field
                     name={'name'}
                     label={'バックアップ名'}
-                    description={'指定した場合、このバックアップを参照するために使用される名前。'}
+                    description={'入力した場合、このバックアップを識別するための名前として使用されます。'}
                 />
                 <div css={tw`mt-6`}>
                     <FormikFieldWrapper
                         name={'ignored'}
-                        label={'無視するファイルとディレクトリ'}
+                        label={'除外するファイルとディレクトリ'}
                         description={`
-                            バックアップ生成時に無視するファイルまたはフォルダーを入力してください。空白にすると、
-                            サーバーディレクトリのルートにある.pteroignoreファイルの内容が使用されます（存在する場合）。
-                            ワイルドカードによるファイルとフォルダーのマッチングに加え、パスの先頭に感嘆符を付けることで
-                            ルールを否定できます。
+                            このバックアップの生成時に除外するファイルまたはフォルダーを入力してください。空欄の場合、
+                            サーバーディレクトリのルートに .pteroignore ファイルが存在すれば、その内容を使用します。
+                            ファイルやフォルダーのワイルドカード一致に加え、パスの先頭に感嘆符を付けることで
+                            ルールの否定にも対応しています。
                         `}
                     >
                         <FormikField as={Textarea} name={'ignored'} rows={6} />
@@ -52,14 +52,14 @@ const ModalContent = ({ ...props }: RequiredModalProps) => {
                     <div css={tw`mt-6 bg-neutral-700 border border-neutral-800 shadow-inner p-4 rounded`}>
                         <FormikSwitch
                             name={'isLocked'}
-                            label={'ロック'}
-                            description={'明示的にロック解除されるまで、このバックアップの削除を防ぎます。'}
+                            label={'ロック済み'}
+                            description={'明示的にロックを解除するまで、このバックアップが削除されないようにします。'}
                         />
                     </div>
                 </Can>
                 <div css={tw`flex justify-end mt-6`}>
                     <Button type={'submit'} disabled={isSubmitting}>
-                        バックアップ開始
+                        バックアップを開始
                     </Button>
                 </div>
             </Form>

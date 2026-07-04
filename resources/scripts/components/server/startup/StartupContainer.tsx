@@ -80,17 +80,17 @@ const StartupContainer = () => {
         !error || (error && isValidating) ? (
             <Spinner centered size={Spinner.Size.LARGE} />
         ) : (
-            <ServerError title={'エラーが発生しました'} message={httpErrorToHuman(error)} onRetry={() => mutate()} />
+            <ServerError title={'エラー'} message={httpErrorToHuman(error)} onRetry={() => mutate()} />
         )
     ) : (
-        <ServerContentBlock title={'スタートアップ設定'} showFlashKey={'startup:image'}>
+        <ServerContentBlock title={'起動設定'} showFlashKey={'startup:image'}>
             <div css={tw`md:flex`}>
-                <TitledGreyBox title={'スタートアップコマンド'} css={tw`flex-1`}>
+                <TitledGreyBox title={'起動コマンド'} css={tw`flex-1`}>
                     <div css={tw`px-1 py-2`}>
                         <p css={tw`font-mono bg-neutral-900 rounded py-2 px-4`}>{data.invocation}</p>
                     </div>
                 </TitledGreyBox>
-                <TitledGreyBox title={'Dockerイメージ'} css={tw`flex-1 lg:flex-none lg:w-1/3 mt-8 md:mt-0 md:ml-10`}>
+                <TitledGreyBox title={'Docker イメージ'} css={tw`flex-1 lg:flex-none lg:w-1/3 mt-8 md:mt-0 md:ml-10`}>
                     {Object.keys(data.dockerImages).length > 1 && !isCustomImage ? (
                         <>
                             <InputSpinner visible={loading}>
@@ -107,7 +107,7 @@ const StartupContainer = () => {
                                 </Select>
                             </InputSpinner>
                             <p css={tw`text-xs text-neutral-300 mt-2`}>
-                                このサーバーインスタンスの実行時に使用するDockerイメージを選択できる高度な機能です。
+                                この高度な機能では、このサーバーインスタンスを実行するときに使用する Docker イメージを選択できます。
                             </p>
                         </>
                     ) : (
@@ -115,7 +115,7 @@ const StartupContainer = () => {
                             <Input disabled readOnly value={variables.dockerImage} />
                             {isCustomImage && (
                                 <p css={tw`text-xs text-neutral-300 mt-2`}>
-                                    このサーバーのDockerイメージは管理者によって手動で設定されており、このUIから変更することはできません。
+                                    このサーバーの Docker イメージは管理者によって手動で設定されているため、この UI からは変更できません。
                                 </p>
                             )}
                         </>

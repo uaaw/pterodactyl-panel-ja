@@ -29,7 +29,7 @@ export default ({ onFileNamed, onDismissed, ...props }: Props) => {
             onSubmit={submit}
             initialValues={{ fileName: '' }}
             validationSchema={object().shape({
-                fileName: string().required().min(1),
+                fileName: string().required('ファイル名を入力してください。').min(1, 'ファイル名を入力してください。'),
             })}
         >
             {({ resetForm }) => (
@@ -45,11 +45,11 @@ export default ({ onFileNamed, onDismissed, ...props }: Props) => {
                             id={'fileName'}
                             name={'fileName'}
                             label={'ファイル名'}
-                            description={'このファイルの保存名を入力してください。'}
+                            description={'このファイルを保存する名前を入力してください。'}
                             autoFocus
                         />
                         <div css={tw`mt-6 text-right`}>
-                            <Button type={'submit'}>ファイルを作成</Button>
+                            <Button>ファイルを作成</Button>
                         </div>
                     </Form>
                 </Modal>

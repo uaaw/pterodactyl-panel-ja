@@ -56,17 +56,17 @@ export default () => {
                 <React.Fragment>
                     <SpinnerOverlay size={'large'} visible={isSubmitting} />
                     <Form css={tw`m-0`}>
-                        <Field id={'current_email'} type={'email'} name={'email'} label={'メールアドレス'} />
+                        <Field id={'current_email'} type={'email'} name={'email'} label={'メール'} />
                         <div css={tw`mt-6`}>
                             <Field
                                 id={'confirm_password'}
                                 type={'password'}
                                 name={'password'}
-                                label={'パスワード（確認）'}
+                                label={'パスワードの確認'}
                             />
                         </div>
                         <div css={tw`mt-6`}>
-                            <Button disabled={isSubmitting || !isValid}>メールアドレスを更新</Button>
+                            <Button disabled={isSubmitting || !isValid}>メールを更新</Button>
                         </div>
                     </Form>
                 </React.Fragment>

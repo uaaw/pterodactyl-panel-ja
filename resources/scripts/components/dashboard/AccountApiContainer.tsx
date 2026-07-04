@@ -57,11 +57,11 @@ export default () => {
                         onClose={() => setDeleteIdentifier('')}
                         onConfirmed={() => doDeletion(deleteIdentifier)}
                     >
-                        <Code>{deleteIdentifier}</Code> キーを使用しているすべてのリクエストは無効になります。
+                        <Code>{deleteIdentifier}</Code> キーを使用するすべてのリクエストが無効化されます。
                     </Dialog.Confirm>
                     {keys.length === 0 ? (
                         <p css={tw`text-center text-sm`}>
-                            {loading ? '読み込み中...' : 'このアカウントにはAPIキーが存在しません。'}
+                            {loading ? '読み込み中...' : 'このアカウントにはAPIキーがありません。'}
                         </p>
                     ) : (
                         keys.map((key, index) => (
@@ -74,7 +74,7 @@ export default () => {
                                     <p css={tw`text-sm break-words`}>{key.description}</p>
                                     <p css={tw`text-2xs text-neutral-300 uppercase`}>
                                         最終使用:&nbsp;
-                                        {key.lastUsedAt ? format(key.lastUsedAt, 'yyyy年MM月dd日 HH:mm') : '未使用'}
+                                        {key.lastUsedAt ? format(key.lastUsedAt, 'MMM do, yyyy HH:mm') : 'なし'}
                                     </p>
                                 </div>
                                 <p css={tw`text-sm ml-4 hidden md:block`}>

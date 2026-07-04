@@ -26,10 +26,10 @@ const ServerConsoleContainer = () => {
             {(isNodeUnderMaintenance || isInstalling || isTransferring) && (
                 <Alert type={'warning'} className={'mb-4'}>
                     {isNodeUnderMaintenance
-                        ? 'このサーバーのノードは現在メンテナンス中で、すべての操作が利用できません。'
+                        ? 'このサーバーのノードは現在メンテナンス中のため、すべての操作を利用できません。'
                         : isInstalling
-                        ? 'このサーバーは現在インストール処理を実行中で、ほとんどの操作が利用できません。'
-                        : 'このサーバーは現在別のノードに転送中で、すべての操作が利用できません。'}
+                        ? 'このサーバーは現在インストール処理を実行中のため、ほとんどの操作を利用できません。'
+                        : 'このサーバーは現在別のノードへ転送中のため、すべての操作を利用できません。'}
                 </Alert>
             )}
             <div className={'grid grid-cols-4 gap-4 mb-4'}>

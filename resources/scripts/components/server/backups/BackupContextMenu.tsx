@@ -122,20 +122,21 @@ export default ({ backup }: Props) => {
             <Dialog.Confirm
                 open={modal === 'unlock'}
                 onClose={() => setModal('')}
-                title={`"${backup.name}"のロックを解除`}
+                title={`"${backup.name}" のロックを解除`}
                 onConfirmed={onLockToggle}
             >
-                このバックアップは自動または誤って削除されなくなりません。（保護が解除されます）
+                このバックアップは、自動削除や誤削除から保護されなくなります。
             </Dialog.Confirm>
             <Dialog.Confirm
                 open={modal === 'restore'}
                 onClose={() => setModal('')}
                 confirm={'復元'}
-                title={`"${backup.name}"を復元`}
+                title={`"${backup.name}" を復元`}
                 onConfirmed={() => doRestorationAction()}
             >
                 <p>
-                    サーバーが停止されます。完了するまで、電源状態の制御、ファイルマネージャーへのアクセス、追加バックアップの作成ができません。
+                    サーバーは停止されます。完了するまで、電源状態の操作、ファイルマネージャーへのアクセス、
+                    追加バックアップの作成はできません。
                 </p>
                 <p css={tw`mt-4 -mb-2 bg-gray-700 p-3 rounded`}>
                     <label htmlFor={'restore_truncate'} css={tw`text-base flex items-center cursor-pointer`}>
@@ -147,18 +148,18 @@ export default ({ backup }: Props) => {
                             checked={truncate}
                             onChange={() => setTruncate((s) => !s)}
                         />
-                        バックアップを復元する前にすべてのファイルを削除します。
+                        バックアップを復元する前にすべてのファイルを削除する。
                     </label>
                 </p>
             </Dialog.Confirm>
             <Dialog.Confirm
-                title={`"${backup.name}"を削除`}
+                title={`"${backup.name}" を削除`}
                 confirm={'続行'}
                 open={modal === 'delete'}
                 onClose={() => setModal('')}
                 onConfirmed={doDeletion}
             >
-                これは永久的な操作です。バックアップは削除後復元できません。
+                これは元に戻せない操作です。削除したバックアップは復元できません。
             </Dialog.Confirm>
             <SpinnerOverlay visible={loading} fixed />
             {backup.isSuccessful ? (

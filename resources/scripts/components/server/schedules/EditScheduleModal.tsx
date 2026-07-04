@@ -95,7 +95,7 @@ const EditScheduleModal = ({ schedule }: Props) => {
                     <Field
                         name={'name'}
                         label={'スケジュール名'}
-                        description={'このスケジュールを識別するための名称を入力してください。'}
+                        description={'このスケジュールを識別しやすい名前です。'}
                     />
                     <div css={tw`grid grid-cols-2 sm:grid-cols-5 gap-4 mt-6`}>
                         <Field name={'minute'} label={'分'} />
@@ -105,14 +105,13 @@ const EditScheduleModal = ({ schedule }: Props) => {
                         <Field name={'dayOfWeek'} label={'曜日'} />
                     </div>
                     <p css={tw`text-neutral-400 text-xs mt-2`}>
-                        スケジュールシステムはタスクの実行タイミングを定義する際にCron構文をサポートしています。
-                        上記のフィールドを使用して、これらのタスクの実行タイミングを指定してください。
+                        スケジュールシステムでは、タスクの実行開始タイミングを定義するために Cronjob 構文を使用できます。上の項目で、これらのタスクをいつ開始するか指定してください。
                     </p>
                     <div css={tw`mt-6 bg-neutral-700 border border-neutral-800 shadow-inner p-4 rounded`}>
                         <Switch
                             name={'show_cheatsheet'}
-                            description={'Cron式の例を表示するチートシートを表示します。'}
-                            label={'チートシートを表示'}
+                            description={'例を確認できる Cron 早見表を表示します。'}
+                            label={'早見表を表示'}
                             defaultChecked={showCheatsheet}
                             onChange={() => setShowCheetsheet((s) => !s)}
                         />
@@ -125,15 +124,15 @@ const EditScheduleModal = ({ schedule }: Props) => {
                     <div css={tw`mt-6 bg-neutral-700 border border-neutral-800 shadow-inner p-4 rounded`}>
                         <FormikSwitch
                             name={'onlyWhenOnline'}
-                            description={'サーバーが実行中の場合のみこのスケジュールを実行します。'}
-                            label={'サーバーがオンラインの場合のみ'}
+                            description={'サーバーが実行中の場合にのみ、このスケジュールを実行します。'}
+                            label={'サーバーがオンラインのときのみ'}
                         />
                     </div>
                     <div css={tw`mt-6 bg-neutral-700 border border-neutral-800 shadow-inner p-4 rounded`}>
                         <FormikSwitch
                             name={'enabled'}
                             description={'有効にすると、このスケジュールは自動的に実行されます。'}
-                            label={'スケジュール有効'}
+                            label={'スケジュールを有効化'}
                         />
                     </div>
                     <div css={tw`mt-6 text-right`}>

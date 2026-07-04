@@ -46,7 +46,7 @@ export default ({ scheduleId, onDeleted }: Props) => {
                 onConfirmed={onDelete}
             >
                 <SpinnerOverlay visible={isLoading} />
-                すべてのタスクが削除され、実行中のプロセスは終了されます。
+                すべてのタスクが削除され、実行中の処理は終了されます。
             </Dialog.Confirm>
             <Button.Danger
                 variant={Button.Variants.Secondary}

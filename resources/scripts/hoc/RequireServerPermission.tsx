@@ -11,7 +11,7 @@ const RequireServerPermission: React.FC<RequireServerPermissionProps> = ({ child
         <Can
             action={permissions}
             renderOnError={
-                <ServerError title={'Access Denied'} message={'You do not have permission to access this page.'} />
+                <ServerError title={'アクセス拒否'} message={'このページにアクセスする権限がありません。'} />
             }
         >
             {children}

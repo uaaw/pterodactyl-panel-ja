@@ -66,7 +66,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
     useEffect(() => {
         // Don't waste a HTTP request if there is nothing important to show to the user because
         // the server is suspended.
-        if (isSuspended || server.isNodeUnderMaintenance) return;
+        if (isSuspended) return;
 
         getStats().then(() => {
             interval.current = setInterval(() => getStats(), 30000);
@@ -75,7 +75,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
         return () => {
             interval.current && clearInterval(interval.current);
         };
-    }, [isSuspended, server.isNodeUnderMaintenance]);
+    }, [isSuspended]);
 
     const alarms = { cpu: false, memory: false, disk: false };
     if (stats) {
@@ -116,17 +116,11 @@ export default ({ server, className }: { server: Server; className?: string }) =
                 </div>
             </div>
             <div css={tw`hidden col-span-7 lg:col-span-4 sm:flex items-baseline justify-center`}>
-                {!stats || isSuspended || server.isNodeUnderMaintenance ? (
+                {!stats || isSuspended ? (
                     isSuspended ? (
                         <div css={tw`flex-1 text-center`}>
                             <span css={tw`bg-red-500 rounded px-2 py-1 text-red-100 text-xs`}>
                                 {server.status === 'suspended' ? '停止中' : '接続エラー'}
-                            </span>
-                        </div>
-                    ) : server.isNodeUnderMaintenance ? (
-                        <div css={tw`flex-1 text-center`}>
-                            <span css={tw`bg-yellow-500 rounded px-2 py-1 text-yellow-100 text-xs`}>
-                                メンテナンス中
                             </span>
                         </div>
                     ) : server.isTransferring || server.status ? (
@@ -153,7 +147,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {stats.cpuUsagePercent.toFixed(2)} %
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>上限: {cpuLimit}</p>
+                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>上限 {cpuLimit}</p>
                         </div>
                         <div css={tw`flex-1 ml-4 sm:block hidden`}>
                             <div css={tw`flex justify-center`}>
@@ -162,7 +156,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.memoryUsageInBytes)}
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>上限: {memoryLimit}</p>
+                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>上限 {memoryLimit}</p>
                         </div>
                         <div css={tw`flex-1 ml-4 sm:block hidden`}>
                             <div css={tw`flex justify-center`}>
@@ -171,7 +165,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.diskUsageInBytes)}
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>上限: {diskLimit}</p>
+                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>上限 {diskLimit}</p>
                         </div>
                     </React.Fragment>
                 )}

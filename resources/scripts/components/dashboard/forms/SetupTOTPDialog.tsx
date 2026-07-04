@@ -74,7 +74,7 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
                 </p>
             </CopyOnClick>
             <p id={'totp-code-description'} className={'mt-6'}>
-                お好みの2段階認証アプリで上記のQRコードをスキャンし、生成された6桁のコードを下のフィールドに入力してください。
+                任意の2段階認証アプリで上のQRコードをスキャンしてください。その後、生成された6桁のコードを下のフィールドに入力してください。
             </p>
             <Input.Text
                 aria-labelledby={'totp-code-description'}
@@ -104,7 +104,7 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
                     disabled={password.length > 0 && value.length === 6}
                     content={
                         !token
-                            ? 'QRコードの読み込みを待っています...'
+                            ? 'QRコードの読み込みを待機しています...'
                             : '続行するには6桁のコードとパスワードを入力してください。'
                     }
                     delay={100}
@@ -125,5 +125,5 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
 export default asDialog({
     title: '2段階認証を有効化',
     description:
-        'アカウントを不正アクセスから保護します。サインインのたびに確認コードの入力が求められます。',
+        '不正アクセスからアカウントを保護します。サインインするたびに確認コードの入力を求められます。',
 })(ConfigureTwoFactorForm);

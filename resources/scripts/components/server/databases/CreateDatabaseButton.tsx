@@ -19,11 +19,11 @@ interface Values {
 const schema = object().shape({
     databaseName: string()
         .required('データベース名を入力してください。')
-        .min(3, 'データベース名は3文字以上で入力してください。')
-        .max(48, 'データベース名は48文字以下で入力してください。')
+        .min(3, 'データベース名は 3 文字以上である必要があります。')
+        .max(48, 'データベース名は 48 文字以内である必要があります。')
         .matches(
             /^[\w\-.]{3,48}$/,
-            'データベース名は英数字、アンダースコア、ダッシュ、ピリオドのみ使用できます。'
+            'データベース名には英数字、アンダースコア、ダッシュ、ピリオドのみ使用できます。'
         ),
     connectionsFrom: string().matches(/^[\w\-/.%:]+$/, '有効なホストアドレスを入力してください。'),
 });
@@ -76,7 +76,7 @@ export default () => {
                                 id={'database_name'}
                                 name={'databaseName'}
                                 label={'データベース名'}
-                                description={'データベースインスタンスの説明的な名前。'}
+                                description={'データベースインスタンスを識別するための名前です。'}
                             />
                             <div css={tw`mt-6`}>
                                 <Field
@@ -85,7 +85,7 @@ export default () => {
                                     name={'connectionsFrom'}
                                     label={'接続元'}
                                     description={
-                                        '接続を許可する場所。空白にするとどこからの接続も許可されます。'
+                                        '接続を許可する送信元です。空欄にすると、どこからでも接続を許可します。'
                                     }
                                 />
                             </div>
@@ -106,7 +106,7 @@ export default () => {
                     </Modal>
                 )}
             </Formik>
-            <Button onClick={() => setVisible(true)}>新しいデータベース</Button>
+            <Button onClick={() => setVisible(true)}>新規データベース</Button>
         </>
     );
 };

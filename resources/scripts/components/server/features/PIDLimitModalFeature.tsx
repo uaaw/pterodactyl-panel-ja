@@ -60,20 +60,20 @@ const PIDLimitModalFeature = () => {
                 <>
                     <div css={tw`mt-4 sm:flex items-center`}>
                         <FontAwesomeIcon css={tw`pr-4`} icon={faExclamationTriangle} color={'orange'} size={'4x'} />
-                        <h2 css={tw`text-2xl mb-4 text-neutral-100 `}>Memory or process limit reached...</h2>
+                        <h2 css={tw`text-2xl mb-4 text-neutral-100 `}>メモリまたはプロセス上限に達しました...</h2>
                     </div>
-                    <p css={tw`mt-4`}>This server has reached the maximum process or memory limit.</p>
+                    <p css={tw`mt-4`}>このサーバーはプロセスまたはメモリの最大上限に達しました。</p>
                     <p css={tw`mt-4`}>
-                        Increasing <code css={tw`font-mono bg-neutral-900`}>container_pid_limit</code> in the wings
-                        configuration, <code css={tw`font-mono bg-neutral-900`}>config.yml</code>, might help resolve
-                        this issue.
+                        Wings の設定ファイル <code css={tw`font-mono bg-neutral-900`}>config.yml</code> にある{' '}
+                        <code css={tw`font-mono bg-neutral-900`}>container_pid_limit</code>{' '}
+                        を増やすことで、この問題を解決できる場合があります。
                     </p>
                     <p css={tw`mt-4`}>
-                        <b>Note: Wings must be restarted for the configuration file changes to take effect</b>
+                        <b>注意: 設定ファイルの変更を反映するには Wings の再起動が必要です</b>
                     </p>
                     <div css={tw`mt-8 sm:flex items-center justify-end`}>
                         <Button onClick={() => setVisible(false)} css={tw`w-full sm:w-auto border-transparent`}>
-                            Close
+                            閉じる
                         </Button>
                     </div>
                 </>
@@ -81,11 +81,10 @@ const PIDLimitModalFeature = () => {
                 <>
                     <div css={tw`mt-4 sm:flex items-center`}>
                         <FontAwesomeIcon css={tw`pr-4`} icon={faExclamationTriangle} color={'orange'} size={'4x'} />
-                        <h2 css={tw`text-2xl mb-4 text-neutral-100`}>Possible resource limit reached...</h2>
+                        <h2 css={tw`text-2xl mb-4 text-neutral-100`}>リソース上限に達した可能性があります...</h2>
                     </div>
                     <p css={tw`mt-4`}>
-                        This server is attempting to use more resources than allocated. Please contact the administrator
-                        and give them the error below.
+                        このサーバーは割り当て量を超えるリソースを使用しようとしています。管理者に連絡し、下記のエラーを伝えてください。
                     </p>
                     <p css={tw`mt-4`}>
                         <code css={tw`font-mono bg-neutral-900`}>
@@ -94,7 +93,7 @@ const PIDLimitModalFeature = () => {
                     </p>
                     <div css={tw`mt-8 sm:flex items-center justify-end`}>
                         <Button onClick={() => setVisible(false)} css={tw`w-full sm:w-auto border-transparent`}>
-                            Close
+                            閉じる
                         </Button>
                     </div>
                 </>

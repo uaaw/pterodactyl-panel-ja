@@ -32,8 +32,8 @@ export default () => {
     return (
         <PageContentBlock title={'アカウント概要'}>
             {state?.twoFactorRedirect && (
-                <MessageBox title={'2段階認証が必要です'} type={'error'}>
-                    続行するには、アカウントで2段階認証を有効にする必要があります。
+                <MessageBox title={'2要素認証が必要です'} type={'error'}>
+                    続行するには、アカウントで2要素認証を有効にする必要があります。
                 </MessageBox>
             )}
 

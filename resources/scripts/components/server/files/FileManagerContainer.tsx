@@ -79,7 +79,7 @@ export default () => {
                             <NewDirectoryButton />
                             <UploadButton />
                             <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                                <Button>新しいファイル</Button>
+                                <Button>新規ファイル</Button>
                             </NavLink>
                         </div>
                     </Can>
@@ -97,7 +97,7 @@ export default () => {
                                 {files.length > 250 && (
                                     <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
                                         <p css={tw`text-yellow-900 text-sm text-center`}>
-                                            このディレクトリはブラウザでの表示には大きすぎるため、最初の250件のファイルに制限されています。
+                                            このディレクトリは大きすぎるためブラウザーで全件表示できません。最初の 250 ファイルに表示を制限しています。
                                         </p>
                                     </div>
                                 )}

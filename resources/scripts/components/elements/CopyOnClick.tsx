@@ -52,7 +52,7 @@ const CopyOnClick = ({ text, showInNotification = true, children }: CopyOnClickP
                             <div className={'rounded-md py-3 px-4 text-gray-200 bg-neutral-600/95 shadow'}>
                                 <p>
                                     {showInNotification
-                                        ? `"${String(text)}" をクリップボードにコピーしました。`
+                                        ? `「${String(text)}」をクリップボードにコピーしました。`
                                         : 'テキストをクリップボードにコピーしました。'}
                                 </p>
                             </div>

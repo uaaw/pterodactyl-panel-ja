@@ -61,16 +61,16 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                         <FormikFieldWrapper
                             label={'説明'}
                             name={'description'}
-                            description={'このAPIキーの説明。'}
+                            description={'このAPIキーの説明です。'}
                             css={tw`mb-6`}
                         >
                             <Field name={'description'} as={Input} />
                         </FormikFieldWrapper>
                         <FormikFieldWrapper
-                            label={'許可するIPアドレス'}
+                            label={'許可IP'}
                             name={'allowedIps'}
                             description={
-                                '空欄にすると、すべてのIPアドレスからのAPIキーの使用が許可されます。それ以外の場合は、新しい行ごとにIPアドレスを入力してください。'
+                                '任意のIPアドレスでこのAPIキーを使用できるようにする場合は空欄のままにしてください。制限する場合は、各IPアドレスを1行ずつ入力してください。'
                             }
                         >
                             <Field name={'allowedIps'} as={CustomTextarea} />

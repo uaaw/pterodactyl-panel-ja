@@ -57,7 +57,7 @@ export default () => {
             {rootAdmin && (
                 <div css={tw`mb-2 flex justify-end items-center`}>
                     <p css={tw`uppercase text-xs text-neutral-400 mr-2`}>
-                        {showOnlyAdmin ? '他人のサーバーを表示中' : 'あなたのサーバーを表示中'}
+                        {showOnlyAdmin ? '他のユーザーのサーバーを表示中' : '自分のサーバーを表示中'}
                     </p>
                     <Switch
                         name={'show_all_servers'}
@@ -78,8 +78,8 @@ export default () => {
                         ) : (
                             <p css={tw`text-center text-sm text-neutral-400`}>
                                 {showOnlyAdmin
-                                    ? '表示する他のサーバーはありません。'
-                                    : 'あなたのアカウントに関連付けられたサーバーはありません。'}
+                                    ? '表示できる他のサーバーはありません。'
+                                    : 'アカウントに関連付けられたサーバーはありません。'}
                             </p>
                         )
                     }

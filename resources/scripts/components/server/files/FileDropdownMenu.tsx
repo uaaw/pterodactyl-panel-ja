@@ -136,7 +136,8 @@ const FileDropdownMenu = ({ file }: { file: FileObject }) => {
                 confirm={'削除'}
                 onConfirmed={doDeletion}
             >
-                <span className={'font-semibold text-gray-50'}>{file.name}</span> を削除すると、元に戻すことはできません。
+                削除すると、<span className={'font-semibold text-gray-50'}>{file.name}</span>
+                の内容を復元できなくなります。
             </Dialog.Confirm>
             <DropdownMenu
                 ref={onClickRef}
@@ -177,7 +178,7 @@ const FileDropdownMenu = ({ file }: { file: FileObject }) => {
                 )}
                 {file.isArchiveType() ? (
                     <Can action={'file.create'}>
-                        <Row onClick={doUnarchive} icon={faBoxOpen} title={'アーカイブ解除'} />
+                        <Row onClick={doUnarchive} icon={faBoxOpen} title={'展開'} />
                     </Can>
                 ) : (
                     <Can action={'file.archive'}>

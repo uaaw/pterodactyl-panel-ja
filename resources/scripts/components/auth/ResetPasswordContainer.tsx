@@ -39,7 +39,7 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
                 console.error(error);
 
                 setSubmitting(false);
-                addFlash({ type: 'error', title: 'Error', message: httpErrorToHuman(error) });
+                addFlash({ type: 'error', title: 'エラー', message: httpErrorToHuman(error) });
             });
     };
 
@@ -53,7 +53,7 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
             validationSchema={object().shape({
                 password: string()
                     .required('新しいパスワードを入力してください。')
-                    .min(8, '新しいパスワードは8文字以上で入力してください。'),
+                    .min(8, '新しいパスワードは8文字以上である必要があります。'),
                 passwordConfirmation: string()
                     .required('新しいパスワードが一致しません。')
                     // @ts-expect-error this is valid
@@ -63,7 +63,7 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
             {({ isSubmitting }) => (
                 <LoginFormContainer title={'パスワードをリセット'} css={tw`w-full flex`}>
                     <div>
-                        <label>メールアドレス</label>
+                        <label>メール</label>
                         <Input value={email} isLight disabled />
                     </div>
                     <div css={tw`mt-6`}>
@@ -72,11 +72,11 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
                             label={'新しいパスワード'}
                             name={'password'}
                             type={'password'}
-                            description={'パスワードは8文字以上で入力してください。'}
+                            description={'パスワードは8文字以上である必要があります。'}
                         />
                     </div>
                     <div css={tw`mt-6`}>
-                        <Field light label={'新しいパスワード（確認）'} name={'passwordConfirmation'} type={'password'} />
+                        <Field light label={'新しいパスワードの確認'} name={'passwordConfirmation'} type={'password'} />
                     </div>
                     <div css={tw`mt-6`}>
                         <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>

@@ -64,11 +64,11 @@ const NetworkContainer = () => {
                             <SpinnerOverlay visible={loading} />
                             <div css={tw`mt-6 sm:flex items-center justify-end`}>
                                 <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
-                                    このサーバーでは{allocationLimit}個中{data.length}個のアロケーションを使用中です。
+                                    このサーバーでは許可された {allocationLimit} 個の割り当てのうち {data.length} 個を使用しています。
                                 </p>
                                 {allocationLimit > data.length && (
                                     <Button css={tw`w-full sm:w-auto`} color={'primary'} onClick={onCreateAllocation}>
-                                        アロケーションを作成
+                                        割り当てを作成
                                     </Button>
                                 )}
                             </div>

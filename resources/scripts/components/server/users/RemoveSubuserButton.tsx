@@ -43,7 +43,7 @@ export default ({ subuser }: { subuser: Subuser }) => {
                 onConfirmed={() => doDeletion()}
                 onModalDismissed={() => setShowConfirmation(false)}
             >
-                このサブユーザーを削除してもよろしいですか？このサーバーへのすべてのアクセスが直ちに取り消されます。
+                このサブユーザーを削除してもよろしいですか？このサーバーへのすべてのアクセス権が直ちに取り消されます。
             </ConfirmationModal>
             <button
                 type={'button'}

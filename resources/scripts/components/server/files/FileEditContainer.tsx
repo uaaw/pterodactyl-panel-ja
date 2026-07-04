@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import getFileContents from '@/api/server/files/getFileContents';
 import { httpErrorToHuman } from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
@@ -21,8 +21,6 @@ import { encodePathSegments, hashToPath } from '@/helpers';
 import { dirname } from 'pathe';
 import CodemirrorEditor from '@/components/elements/CodemirrorEditor';
 
-const getNewFileDraftKey = (uuid: string, directory: string) => `pterodactyl:new-file:${uuid}:${directory}`;
-
 export default () => {
     const [error, setError] = useState('');
     const { action } = useParams<{ action: 'new' | string }>();
@@ -39,80 +37,46 @@ export default () => {
     const setDirectory = ServerContext.useStoreActions((actions) => actions.files.setDirectory);
     const { addError, clearFlashes } = useFlash();
 
-    const filePath = hashToPath(hash);
-    const directory = action === 'new' ? filePath : dirname(filePath);
-    const draftKey = action === 'new' ? getNewFileDraftKey(uuid, directory) : undefined;
-    const saveDraft = useCallback(
-        (value: string) => {
-            if (!draftKey) return;
-
-            if (value.length > 0) {
-                sessionStorage.setItem(draftKey, value);
-            } else {
-                sessionStorage.removeItem(draftKey);
-            }
-        },
-        [draftKey]
-    );
-
     let fetchFileContent: null | (() => Promise<string>) = null;
-
-    useEffect(() => {
-        setDirectory(directory);
-    }, [directory, setDirectory]);
-
-    useEffect(() => {
-        if (!draftKey) return;
-
-        setContent(sessionStorage.getItem(draftKey) || '');
-    }, [draftKey]);
 
     useEffect(() => {
         if (action === 'new') return;
 
         setError('');
         setLoading(true);
-        getFileContents(uuid, filePath)
+        const path = hashToPath(hash);
+        setDirectory(dirname(path));
+        getFileContents(uuid, path)
             .then(setContent)
             .catch((error) => {
                 console.error(error);
                 setError(httpErrorToHuman(error));
             })
             .then(() => setLoading(false));
-    }, [action, uuid, filePath]);
+    }, [action, uuid, hash]);
 
-    const save = async (name?: string) => {
+    const save = (name?: string) => {
         if (!fetchFileContent) {
             return;
         }
 
         setLoading(true);
         clearFlashes('files:view');
-
-        let redirecting = false;
-
-        try {
-            const content = await fetchFileContent();
-
-            await saveFileContents(uuid, name || filePath, content);
-
-            if (name) {
-                if (draftKey) {
-                    sessionStorage.removeItem(draftKey);
+        fetchFileContent()
+            .then((content) => saveFileContents(uuid, name || hashToPath(hash), content))
+            .then(() => {
+                if (name) {
+                    history.push(`/server/${id}/files/edit#/${encodePathSegments(name)}`);
+                    return;
                 }
 
-                history.push(`/server/${id}/files/edit#/${encodePathSegments(name)}`);
-                redirecting = true;
-                return;
-            }
-        } catch (error) {
-            console.error(error);
-            addError({ message: httpErrorToHuman(error), key: 'files:view' });
-        } finally {
-            if (!redirecting) {
-                setLoading(false);
-            }
-        }
+                return Promise.resolve();
+            })
+            .catch((error) => {
+                console.error(error);
+                addError({ message: httpErrorToHuman(error), key: 'files:view' });
+            })
+            .then(() => setLoading(false));
     };
 
     if (error) {
@@ -130,11 +94,11 @@ export default () => {
             {hash.replace(/^#/, '').endsWith('.pteroignore') && (
                 <div css={tw`mb-4 p-4 border-l-4 bg-neutral-900 rounded border-cyan-400`}>
                     <p css={tw`text-neutral-300 text-sm`}>
-                        You&apos;re editing a <code css={tw`font-mono bg-black rounded py-px px-1`}>.pteroignore</code>{' '}
-                        file. Any files or directories listed in here will be excluded from backups. Wildcards are
-                        supported by using an asterisk (<code css={tw`font-mono bg-black rounded py-px px-1`}>*</code>).
-                        You can negate a prior rule by prepending an exclamation point (
-                        <code css={tw`font-mono bg-black rounded py-px px-1`}>!</code>).
+                        <code css={tw`font-mono bg-black rounded py-px px-1`}>.pteroignore</code>{' '}
+                        ファイルを編集中です。ここに記載されたファイルやディレクトリはバックアップから除外されます。アスタリスク
+                        （<code css={tw`font-mono bg-black rounded py-px px-1`}>*</code>）を使ったワイルドカードに対応しています。
+                        先頭に感嘆符を付けることで、前のルールを否定できます（
+                        <code css={tw`font-mono bg-black rounded py-px px-1`}>!</code>）。
                     </p>
                 </div>
             )}
@@ -163,7 +127,6 @@ export default () => {
                             save();
                         }
                     }}
-                    onContentChanged={action === 'new' ? saveDraft : undefined}
                 />
             </div>
             <div css={tw`flex justify-end mt-4`}>
@@ -179,13 +142,13 @@ export default () => {
                 {action === 'edit' ? (
                     <Can action={'file.update'}>
                         <Button css={tw`flex-1 sm:flex-none`} onClick={() => save()}>
-                            Save Content
+                            内容を保存
                         </Button>
                     </Can>
                 ) : (
                     <Can action={'file.create'}>
                         <Button css={tw`flex-1 sm:flex-none`} onClick={() => setModalVisible(true)}>
-                            Create File
+                            ファイルを作成
                         </Button>
                     </Can>
                 )}

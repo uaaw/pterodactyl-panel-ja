@@ -46,7 +46,7 @@ export default ({ className }: PowerButtonProps) => {
                 confirm={'続行'}
                 onConfirmed={onButtonClick.bind(this, 'kill-confirmed')}
             >
-                サーバーを強制停止すると、データが失われる可能性があります。
+                サーバーを強制停止するとデータが破損する可能性があります。
             </Dialog.Confirm>
             <Can action={'control.start'}>
                 <Button
@@ -54,7 +54,7 @@ export default ({ className }: PowerButtonProps) => {
                     disabled={status !== 'offline'}
                     onClick={onButtonClick.bind(this, 'start')}
                 >
-                    開始
+                    起動
                 </Button>
             </Can>
             <Can action={'control.restart'}>
@@ -68,7 +68,7 @@ export default ({ className }: PowerButtonProps) => {
                     disabled={status === 'offline'}
                     onClick={onButtonClick.bind(this, killable ? 'kill' : 'stop')}
                 >
-                    {killable ? '強制停止' : '停止'}
+                    {killable ? '強制終了' : '停止'}
                 </Button.Danger>
             </Can>
         </div>

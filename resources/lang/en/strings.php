@@ -91,5 +91,5 @@ return [
     'enable' => '有効化',
     'disable' => '無効化',
     'save' => '保存',
-    'copyright' => '&copy; 2026 - [Avanfield teams.]',
+    'copyright' => '&copy; 2015 - :year Pterodactyl Software',
 ];

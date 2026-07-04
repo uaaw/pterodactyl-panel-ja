@@ -34,7 +34,7 @@ export default () => {
         callback(opts, index) {
             return {
                 ...opts,
-                label: !index ? '受信' : '送信',
+                label: !index ? 'ネットワーク受信' : 'ネットワーク送信',
                 borderColor: !index ? theme('colors.cyan.400') : theme('colors.yellow.400'),
                 backgroundColor: hexToRgba(!index ? theme('colors.cyan.700') : theme('colors.yellow.700'), 0.5),
             };
@@ -68,7 +68,7 @@ export default () => {
 
     return (
         <>
-            <ChartBlock title={'CPU負荷'}>
+            <ChartBlock title={'CPU 使用率'}>
                 <Line {...cpu.props} />
             </ChartBlock>
             <ChartBlock title={'メモリ'}>

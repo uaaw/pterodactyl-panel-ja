@@ -21,7 +21,7 @@ const schema = Yup.object().shape({
     password: Yup.string().min(8).required(),
     confirmPassword: Yup.string().test(
         'password',
-        'パスワード確認が入力されたパスワードと一致しません。',
+        '確認用パスワードが入力したパスワードと一致しません。',
         function (value) {
             return value === this.parent.password;
         }
@@ -69,7 +69,7 @@ export default () => {
                                 id={'current_password'}
                                 type={'password'}
                                 name={'current'}
-                                label={'現在のパスワード'}
+                                    label={'現在のパスワード'}
                             />
                             <div css={tw`mt-6`}>
                                 <Field
@@ -78,7 +78,7 @@ export default () => {
                                     name={'password'}
                                     label={'新しいパスワード'}
                                     description={
-                                        '新しいパスワードは8文字以上で、このサイト専用のものを設定してください。'
+                                        '新しいパスワードは8文字以上で、このWebサイト専用のものにしてください。'
                                     }
                                 />
                             </div>
@@ -87,7 +87,7 @@ export default () => {
                                     id={'confirm_new_password'}
                                     type={'password'}
                                     name={'confirmPassword'}
-                                    label={'新しいパスワード（確認）'}
+                                    label={'新しいパスワードの確認'}
                                 />
                             </div>
                             <div css={tw`mt-6`}>

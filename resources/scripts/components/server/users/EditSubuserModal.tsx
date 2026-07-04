@@ -27,6 +27,19 @@ interface Values {
     permissions: string[];
 }
 
+const permissionGroupDescriptions: Record<string, string> = {
+    control: 'サーバーの電源状態の制御やコマンド送信に関する権限です。',
+    user: 'サーバー上の他のサブユーザーを管理するための権限です。自分自身のアカウント編集や、自分が持たない権限の付与はできません。',
+    file: 'このサーバーのファイルシステムを変更するための権限です。',
+    backup: 'サーバーバックアップの生成と管理に関する権限です。',
+    allocation: 'このサーバーのポート割り当てを変更するための権限です。',
+    startup: 'このサーバーの起動パラメーターを表示または変更するための権限です。',
+    database: 'このサーバーのデータベース管理に関する権限です。',
+    schedule: 'このサーバーのスケジュール管理に関する権限です。',
+    settings: 'このサーバーの設定へアクセスするための権限です。',
+    activity: 'サーバーのアクティビティログへアクセスするための権限です。',
+};
+
 const EditSubuserModal = ({ subuser }: Props) => {
     const ref = useRef<HTMLHeadingElement>(null);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -96,7 +109,7 @@ const EditSubuserModal = ({ subuser }: Props) => {
             }
             validationSchema={object().shape({
                 email: string()
-                    .max(191, 'メールアドレスは191文字を超えることはできません。')
+                    .max(191, 'メールアドレスは 191 文字以内である必要があります。')
                     .email('有効なメールアドレスを入力してください。')
                     .required('有効なメールアドレスを入力してください。'),
                 permissions: array().of(string()),
@@ -119,7 +132,7 @@ const EditSubuserModal = ({ subuser }: Props) => {
                 {!isRootAdmin && loggedInPermissions[0] !== '*' && (
                     <div css={tw`mt-4 pl-4 py-2 border-l-4 border-cyan-400`}>
                         <p css={tw`text-sm text-neutral-300`}>
-                            他のユーザーを作成または変更する際は、現在あなたのアカウントに割り当てられている権限のみ選択できます。
+                            他のユーザーを作成または変更するときは、現在あなたのアカウントに割り当てられている権限のみ選択できます。
                         </p>
                     </div>
                 )}
@@ -127,9 +140,9 @@ const EditSubuserModal = ({ subuser }: Props) => {
                     <div css={tw`mt-6`}>
                         <Field
                             name={'email'}
-                            label={'ユーザーメールアドレス'}
+                            label={'ユーザーのメールアドレス'}
                             description={
-                                'このサーバーのサブユーザーとして招待したいユーザーのメールアドレスを入力してください。'
+                                'このサーバーのサブユーザーとして招待するユーザーのメールアドレスを入力してください。'
                             }
                         />
                     </div>
@@ -145,7 +158,9 @@ const EditSubuserModal = ({ subuser }: Props) => {
                                 permissions={Object.keys(permissions[key].keys).map((pkey) => `${key}.${pkey}`)}
                                 css={index > 0 ? tw`mt-4` : undefined}
                             >
-                                <p css={tw`text-sm text-neutral-400 mb-4`}>{permissions[key].description}</p>
+                                <p css={tw`text-sm text-neutral-400 mb-4`}>
+                                    {permissionGroupDescriptions[key] || permissions[key].description}
+                                </p>
                                 {Object.keys(permissions[key].keys).map((pkey) => (
                                     <PermissionRow
                                         key={`permission_${key}.${pkey}`}

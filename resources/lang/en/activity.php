@@ -22,7 +22,7 @@ return [
     ],
     'user' => [
         'user' => [
-            'create' => '新しいユーザー :email を作成しました',
+            'create' => ':email を新しいユーザーとして作成しました',
         ],
         'account' => [
             'email-changed' => 'メールを :old から :new に変更しました',

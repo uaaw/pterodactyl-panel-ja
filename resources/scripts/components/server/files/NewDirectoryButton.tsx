@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Field from '@/components/elements/Field';
-import { join, normalize } from 'pathe';
+import { join } from 'pathe';
 import { object, string } from 'yup';
 import createDirectory from '@/api/server/files/createDirectory';
 import tw from 'twin.macro';
@@ -24,29 +24,20 @@ const schema = object().shape({
     directoryName: string().required('有効なディレクトリ名を入力してください。'),
 });
 
-const displayNameForDirectory = (name: string): string =>
-    normalize(name)
-        .replace(/^(\.\.\/|\/)+/, '')
-        .split('/', 1)[0] || name;
-
-const generateDirectoryData = (name: string): FileObject => {
-    const displayName = displayNameForDirectory(name);
-
-    return {
-        key: `dir_${displayName}`,
-        name: displayName,
-        mode: 'drwxr-xr-x',
-        modeBits: '0755',
-        size: 0,
-        isFile: false,
-        isSymlink: false,
-        mimetype: '',
-        createdAt: new Date(),
-        modifiedAt: new Date(),
-        isArchiveType: () => false,
-        isEditable: () => false,
-    };
-};
+const generateDirectoryData = (name: string): FileObject => ({
+    key: `dir_${name.split('/', 1)[0] ?? name}`,
+    name: name.replace(/^(\/*)/, '').split('/', 1)[0] ?? name,
+    mode: 'drwxr-xr-x',
+    modeBits: '0755',
+    size: 0,
+    isFile: false,
+    isSymlink: false,
+    mimetype: '',
+    createdAt: new Date(),
+    modifiedAt: new Date(),
+    isArchiveType: () => false,
+    isEditable: () => false,
+});
 
 const NewDirectoryDialog = asDialog({
     title: 'ディレクトリを作成',
@@ -82,7 +73,7 @@ const NewDirectoryDialog = asDialog({
                     <Form css={tw`m-0`}>
                         <Field autoFocus id={'directoryName'} name={'directoryName'} label={'名前'} />
                         <p css={tw`mt-2 text-sm md:text-base break-all`}>
-                            <span css={tw`text-neutral-200`}>このディレクトリは以下として作成されます:&nbsp;</span>
+                            <span css={tw`text-neutral-200`}>このディレクトリは次の場所に作成されます:&nbsp;</span>
                             <Code>
                                 /home/container/
                                 <span css={tw`text-cyan-200`}>

@@ -29,7 +29,7 @@ const RenameServerBox = () => {
             <Form css={tw`mb-0`}>
                 <Field id={'name'} name={'name'} label={'サーバー名'} type={'text'} />
                 <div css={tw`mt-6`}>
-                    <Label>サーバーの説明</Label>
+                    <Label>サーバー説明</Label>
                     <FormikFieldWrapper name={'description'}>
                         <FormikField as={Textarea} name={'description'} rows={3} />
                     </FormikFieldWrapper>
@@ -66,7 +66,7 @@ export default () => {
                 description: server.description,
             }}
             validationSchema={object().shape({
-                name: string().required().min(1),
+                name: string().required('サーバー名を入力してください。').min(1, 'サーバー名を入力してください。'),
                 description: string().nullable(),
             })}
         >

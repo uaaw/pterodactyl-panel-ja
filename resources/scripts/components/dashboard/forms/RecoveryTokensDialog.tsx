@@ -20,9 +20,9 @@ export default ({ tokens, open, onClose }: RecoveryTokenDialogProps) => {
         <Dialog
             open={open}
             onClose={onClose}
-            title={'2段階認証が有効化されました'}
+            title={'2段階認証が有効になりました'}
             description={
-                '以下のコードを安全な場所に保管してください。電話にアクセスできなくなった場合、これらのバックアップコードでサインインできます。'
+                '以下のコードを安全な場所に保管してください。端末にアクセスできなくなった場合、これらのバックアップコードを使用してサインインできます。'
             }
             hideCloseIcon
             preventExternalClose
@@ -41,7 +41,7 @@ export default ({ tokens, open, onClose }: RecoveryTokenDialogProps) => {
                 </pre>
             </CopyOnClick>
             <Alert type={'danger'} className={'mt-3'}>
-                このコードは再度表示されません。
+                これらのコードは再表示されません。
             </Alert>
             <Dialog.Footer>
                 <Button.Text onClick={onClose}>完了</Button.Text>

@@ -15,6 +15,7 @@ import { Button } from '@/components/elements/button/index';
 import ScheduleTaskRow from '@/components/server/schedules/ScheduleTaskRow';
 import isEqual from 'react-fast-compare';
 import { format } from 'date-fns';
+import { ja } from 'date-fns/locale';
 import ScheduleCronRow from '@/components/server/schedules/ScheduleCronRow';
 import RunScheduleButton from '@/components/server/schedules/RunScheduleButton';
 
@@ -104,16 +105,16 @@ export default () => {
                                     )}
                                 </h3>
                                 <p css={tw`mt-1 text-sm text-neutral-200`}>
-                                    最終実行:&nbsp;
+                                    前回実行:&nbsp;
                                     {schedule.lastRunAt ? (
-                                        format(schedule.lastRunAt, "MMM do 'at' h:mma")
+                                        format(schedule.lastRunAt, 'M月d日 HH:mm', { locale: ja })
                                     ) : (
                                         <span css={tw`text-neutral-300`}>なし</span>
                                     )}
                                     <span css={tw`ml-4 pl-4 border-l-4 border-neutral-600 py-px`}>
                                         次回実行:&nbsp;
                                         {schedule.nextRunAt ? (
-                                            format(schedule.nextRunAt, "MMM do 'at' h:mma")
+                                            format(schedule.nextRunAt, 'M月d日 HH:mm', { locale: ja })
                                         ) : (
                                             <span css={tw`text-neutral-300`}>なし</span>
                                         )}
@@ -132,7 +133,7 @@ export default () => {
                         <div css={tw`hidden sm:grid grid-cols-5 md:grid-cols-5 gap-4 mb-4 mt-4`}>
                             <CronBox title={'分'} value={schedule.cron.minute} />
                             <CronBox title={'時'} value={schedule.cron.hour} />
-                            <CronBox title={'日 (月)'} value={schedule.cron.dayOfMonth} />
+                            <CronBox title={'日（月）'} value={schedule.cron.dayOfMonth} />
                             <CronBox title={'月'} value={schedule.cron.month} />
                             <CronBox title={'曜日'} value={schedule.cron.dayOfWeek} />
                         </div>

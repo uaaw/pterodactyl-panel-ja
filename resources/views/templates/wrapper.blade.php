@@ -45,8 +45,5 @@
         @section('scripts')
             {!! $asset->js('main.js') !!}
         @show
-        <footer style="text-align:center; padding:20px; color:#888; font-size:14px;">
-            &copy; 2026 - <a href="https://www.avanfield.com" style="color:#888; text-decoration:underline;">[Avanfield teams.]</a>
-        </footer>
     </body>
 </html>

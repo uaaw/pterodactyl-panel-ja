@@ -65,7 +65,7 @@ export default ({ className }: WithClassname) => {
         clearAndAddHttpError();
         const list = Array.from(files);
         if (list.some((file) => !file.type && (!file.size || file.size === 4096))) {
-            return addError('フォルダーのアップロードはサポートされていません。', 'エラー');
+            return addError('フォルダーのアップロードには対応していません。', 'エラー');
         }
 
         const uploads = list.map((file) => {
@@ -125,7 +125,7 @@ export default ({ className }: WithClassname) => {
                             >
                                 <CloudUploadIcon className={'w-10 h-10 flex-shrink-0'} />
                                 <p className={'font-header flex-1 text-lg text-neutral-100 text-center'}>
-                                    ドラッグ＆ドロップでファイルをアップロード。
+                                    ファイルをドラッグ＆ドロップしてアップロードします。
                                 </p>
                             </div>
                         </div>

@@ -27,16 +27,16 @@ const LoginCheckpointContainer = () => {
     const [isMissingDevice, setIsMissingDevice] = useState(false);
 
     return (
-        <LoginFormContainer title={'デバイスチェックポイント'} css={tw`w-full flex`}>
+        <LoginFormContainer title={'デバイス確認'} css={tw`w-full flex`}>
             <div css={tw`mt-6`}>
                 <Field
                     light
                     name={isMissingDevice ? 'recoveryCode' : 'code'}
-                    title={isMissingDevice ? 'リカバリーコード' : '認証コード'}
+                    title={isMissingDevice ? '復旧コード' : '認証コード'}
                     description={
                         isMissingDevice
-                            ? 'このアカウントで2段階認証を設定した際に生成されたリカバリーコードを入力してください。'
-                            : 'デバイスに表示されている2段階認証コードを入力してください。'
+                            ? '続行するには、このアカウントで2要素認証を設定したときに生成された復旧コードのいずれかを入力してください。'
+                            : 'デバイスで生成された2要素認証トークンを入力してください。'
                     }
                     type={'text'}
                     autoComplete={'one-time-code'}

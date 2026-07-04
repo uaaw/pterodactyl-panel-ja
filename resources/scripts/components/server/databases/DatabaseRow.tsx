@@ -72,17 +72,18 @@ export default ({ database, className }: Props) => {
                         }}
                     >
                         <FlashMessageRender byKey={'database:delete'} css={tw`mb-6`} />
-                        <h2 css={tw`text-2xl mb-6`}>データベースの削除を確認</h2>
+                        <h2 css={tw`text-2xl mb-6`}>データベース削除の確認</h2>
                         <p css={tw`text-sm`}>
-                            データベースの削除は永久的な操作で、元に戻すことはできません。<strong>{database.name}</strong> データベースと関連するすべてのデータが完全に削除されます。
+                            データベースの削除は元に戻せません。<strong>{database.name}</strong>{' '}
+                            データベースと関連するすべてのデータが完全に削除されます。
                         </p>
                         <Form css={tw`m-0 mt-6`}>
                             <Field
                                 type={'text'}
                                 id={'confirm_name'}
                                 name={'confirm'}
-                                label={'データベース名を確認'}
-                                description={'削除を確認するためにデータベース名を入力してください。'}
+                                label={'データベース名の確認'}
+                                description={'削除を確認するため、データベース名を入力してください。'}
                             />
                             <div css={tw`mt-6 text-right`}>
                                 <Button type={'button'} isSecondary css={tw`mr-2`} onClick={() => setVisible(false)}>
@@ -98,7 +99,7 @@ export default ({ database, className }: Props) => {
             </Formik>
             <Modal visible={connectionVisible} onDismissed={() => setConnectionVisible(false)}>
                 <FlashMessageRender byKey={'database-connection-modal'} css={tw`mb-6`} />
-                <h3 css={tw`mb-6 text-2xl`}>データベース接続の詳細</h3>
+                <h3 css={tw`mb-6 text-2xl`}>データベース接続情報</h3>
                 <div>
                     <Label>エンドポイント</Label>
                     <CopyOnClick text={database.connectionString}>
@@ -124,7 +125,7 @@ export default ({ database, className }: Props) => {
                     </div>
                 </Can>
                 <div css={tw`mt-6`}>
-                    <Label>JDBC接続文字列</Label>
+                    <Label>JDBC 接続文字列</Label>
                     <CopyOnClick text={jdbcConnectionString} showInNotification={false}>
                         <Input type={'text'} readOnly value={jdbcConnectionString} />
                     </CopyOnClick>
